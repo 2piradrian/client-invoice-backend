@@ -26,19 +26,19 @@ public class ClientController {
         return new ResponseEntity<>(clientService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/")
-    public ResponseEntity<List<ClientModel>> getAllClients() throws Exception {
-        return new ResponseEntity<>(clientService.findAll(), HttpStatus.OK);
-    }
-
     @PutMapping(path = "/{id}")
     public ResponseEntity<ClientModel> updateClient(@PathVariable Long id, @RequestBody ClientModel client) throws Exception {
         return new ResponseEntity<>(clientService.update(client), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<ClientModel> deleteClient(@PathVariable Long id) {
+    public ResponseEntity<ClientModel> deleteClient(@PathVariable Long id) throws Exception {
         clientService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/")
+    public ResponseEntity<List<ClientModel>> getAllClients() {
+        return new ResponseEntity<>(clientService.findAll(), HttpStatus.OK);
     }
 }

@@ -27,7 +27,7 @@ public class ClientValidation {
         hasInvalidValues(client);
 
         if (client.getId() <= 0){
-            throw new Exception("El id brindado no es valido");
+            throw new Exception("El id no es válido");
         }
         if(optionalClient.isEmpty()){
             throw new Exception("El cliente que intenta modificar no existe");
@@ -35,6 +35,17 @@ public class ClientValidation {
 
     }
 
+    public void findByIdValidation(Long id) throws Exception {
+        if(id <= 0){
+            throw new Exception("El id no es válido");
+        }
+    }
+
+    public void deleteValidation(Long id) throws Exception {
+        if(id <= 0){
+            throw new Exception("El id no es válido");
+        }
+    }
 
     public static void hasInvalidValues (ClientModel client) throws Exception {
         if (client.getName() == null || client.getName().isEmpty()) {

@@ -13,30 +13,31 @@ import java.util.Optional;
 public class ClientService {
 
     @Autowired
-    private ClientValidation clientValdation;
+    private ClientValidation clientValidation;
     @Autowired
     private ClientRepository clientRepository;
 
     public ClientModel create(ClientModel client) throws Exception {
-        clientValdation.createValidation(client);
+        clientValidation.createValidation(client);
         return clientRepository.save(client);
     }
 
     public ClientModel update(ClientModel client) throws Exception{
-        clientValdation.updateValidation(client);
+        clientValidation.updateValidation(client);
         return clientRepository.save(client);
     }
 
-    public ClientModel findById(Long id) {
-        Optional<ClientModel> optionalClient = clientRepository.findById(id)/*.orElseThrow()*/;
-        return optionalClient.orElse(null);
+    public ClientModel findById(Long id) throws Exception {
+        clientValidation.findByIdValidation(id);
+        return clientRepository.findById(id).orElse(null);
     }
 
     public List<ClientModel> findAll() {
         return clientRepository.findAll();
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws Exception {
+        clientValidation.deleteValidation(id);
         clientRepository.deleteById(id);
     }
 }
