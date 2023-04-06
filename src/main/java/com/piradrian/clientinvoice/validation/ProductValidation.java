@@ -16,7 +16,13 @@ public class ProductValidation {
     }
 
     public void createValidation(ProductModel product) throws Exception {
+        Optional<ProductModel> optionalProduct = productRepository.findByCode(product.getCode());
+
         hasInvalidValues(product);
+
+        if(optionalProduct.isPresent()){
+            throw new Exception("El código ya está en uso");
+        }
     }
 
     public void updateValidation(ProductModel product) throws Exception {
@@ -29,6 +35,12 @@ public class ProductValidation {
         }
         if(optionalProduct.isEmpty()){
             throw new Exception("El producto que intenta modificar no existe");
+        }
+
+        Optional<ProductModel> optionalProductWithCode = productRepository.findByCode(product.getCode());
+
+        if (optionalProductWithCode.isPresent() && !optionalProductWithCode.get().getId().equals(product.getId())) {
+            throw new Exception("El código ya está en uso");
         }
 
     }
