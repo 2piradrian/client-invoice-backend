@@ -16,47 +16,29 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @PostMapping
-    public ResponseEntity<ClientModel> createClient(@RequestBody ClientModel client) {
-        ClientModel createdClient = clientService.create(client);
-        return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
+    @PostMapping(path = "/")
+    public ResponseEntity<ClientModel> createClient(@RequestBody ClientModel client) throws Exception {
+        return new ResponseEntity<>(clientService.create(client), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClientModel> getClientById(@PathVariable Long id) {
-        ClientModel client = clientService.findById(id);
-        if (client == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(client, HttpStatus.OK);
-        }
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<ClientModel> getClientById(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(clientService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ClientModel>> getAllClients() {
-        List<ClientModel> clients = clientService.findAll();
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+    @GetMapping(path = "/")
+    public ResponseEntity<List<ClientModel>> getAllClients() throws Exception {
+        return new ResponseEntity<>(clientService.findAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ClientModel> updateClient(@PathVariable Long id, @RequestBody ClientModel client) {
-        client.setId(id);
-        ClientModel updatedClient = clientService.update(client);
-        if (updatedClient == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(updatedClient, HttpStatus.OK);
-        }
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<ClientModel> updateClient(@PathVariable Long id, @RequestBody ClientModel client) throws Exception {
+        return new ResponseEntity<>(clientService.update(client), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
-        ClientModel client = clientService.findById(id);
-        if (client == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            clientService.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<ClientModel> deleteClient(@PathVariable Long id) {
+        clientService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
