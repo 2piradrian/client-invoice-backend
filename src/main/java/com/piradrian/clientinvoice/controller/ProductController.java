@@ -16,33 +16,28 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
-    public ResponseEntity<ProductModel> create(@RequestBody ProductModel product) {
-        ProductModel savedProduct = productService.create(product);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    @PostMapping(path = "/")
+    public ResponseEntity<ProductModel> create(@RequestBody ProductModel product) throws Exception {
+        return new ResponseEntity<>(productService.create(product), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductModel> update(@PathVariable Long id, @RequestBody ProductModel product) {
-        product.setId(id);
-        ProductModel updatedProduct = productService.update(product);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+    @PutMapping("/")
+    public ResponseEntity<ProductModel> update(@RequestBody ProductModel product) throws Exception {
+        return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductModel> findById(@PathVariable Long id) {
-        ProductModel product = productService.findById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+    public ResponseEntity<ProductModel> findById(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping(path = "/")
     public ResponseEntity<List<ProductModel>> findAll() {
-        List<ProductModel> products = productService.findAll();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
