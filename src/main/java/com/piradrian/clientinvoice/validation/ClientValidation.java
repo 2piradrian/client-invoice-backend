@@ -2,23 +2,23 @@ package com.piradrian.clientinvoice.validation;
 
 import com.piradrian.clientinvoice.model.ClientModel;
 import com.piradrian.clientinvoice.repository.ClientRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class ClientValidation {
 
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
+
+    public ClientValidation(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     public void createValidation(ClientModel client) throws Exception {
-        Optional<ClientModel> optionalClient = clientRepository.findById(client.getId());
-
         hasInvalidValues(client);
-
-        if (optionalClient.isPresent()){
-            throw new Exception("El cliente ya existe.");
-        }
     }
 
     public void updateValidation(ClientModel client) throws Exception {

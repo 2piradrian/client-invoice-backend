@@ -26,8 +26,8 @@ public class ClientController {
         return new ResponseEntity<>(clientService.findById(id), HttpStatus.OK);
     }
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<ClientModel> updateClient(@PathVariable Long id, @RequestBody ClientModel client) throws Exception {
+    @PutMapping(path = "/")
+    public ResponseEntity<ClientModel> updateClient(@RequestBody ClientModel client) throws Exception {
         return new ResponseEntity<>(clientService.update(client), HttpStatus.OK);
     }
 
