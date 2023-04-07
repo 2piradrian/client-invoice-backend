@@ -1,12 +1,14 @@
 package com.piradrian.clientinvoice.service;
 
 import com.piradrian.clientinvoice.model.InvoiceModel;
+import com.piradrian.clientinvoice.model.ProductModel;
 import com.piradrian.clientinvoice.repository.InvoiceRepository;
 import com.piradrian.clientinvoice.validation.InvoiceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InvoiceService {
@@ -23,7 +25,12 @@ public class InvoiceService {
     }
 
     public InvoiceModel update(InvoiceModel invoice) throws Exception {
-        invoiceValidation.updateValidation(invoice);
+        Optional<InvoiceModel> optionalInvoice = invoiceRepository.findById(invoice.getId());
+
+        invoiceValidation.updateValidation(invoice, optionalInvoice);
+
+        invoice.setCreated_at(optionalInvoice.get().getCreated_at());
+
         return invoiceRepository.save(invoice);
     }
 

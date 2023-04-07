@@ -4,6 +4,8 @@ import com.piradrian.clientinvoice.model.InvoiceModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Slf4j
 @Component
 public class InvoiceValidation {
@@ -19,14 +21,15 @@ public class InvoiceValidation {
         }
     }
 
-    public void updateValidation(InvoiceModel invoice) throws Exception {
+    public void updateValidation(InvoiceModel invoice, Optional<InvoiceModel> optionalInvoice) throws Exception {
         hasInvalidValues(invoice);
+
+        if(optionalInvoice.isEmpty()){
+            throw new Exception("El reporte que intentas actualizar no existe");
+        }
 
         if (invoice.getClientModel() == null || invoice.getId() <= 0) {
             throw new Exception("El cliente es inválido.");
-        }
-        if (invoice.getCreated_at() == null) {
-            throw new Exception("La fecha de creación es requerida.");
         }
     }
 

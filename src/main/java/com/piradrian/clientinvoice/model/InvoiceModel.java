@@ -21,4 +21,9 @@ public class InvoiceModel {
 
     private double total;
 
+    @PrePersist
+    private void prePersist() {
+        created_at = LocalDateTime.now();
+    }
 }
+
