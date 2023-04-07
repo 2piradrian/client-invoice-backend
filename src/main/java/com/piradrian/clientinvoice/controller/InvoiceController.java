@@ -3,6 +3,8 @@ package com.piradrian.clientinvoice.controller;
 import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,29 +16,29 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @PostMapping
-    public InvoiceModel create(@RequestBody InvoiceModel invoice) {
-        return invoiceService.create(invoice);
+    @PostMapping("/")
+    public ResponseEntity<InvoiceModel> create(@RequestBody InvoiceModel invoice) throws Exception {
+        return new ResponseEntity<>(invoiceService.create(invoice), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public InvoiceModel update(@PathVariable Long id, @RequestBody InvoiceModel invoice) {
-        invoice.setId(id);
-        return invoiceService.update(invoice);
+    @PutMapping("/")
+    public ResponseEntity<InvoiceModel> update(@RequestBody InvoiceModel invoice) throws Exception{
+        return new ResponseEntity<>(invoiceService.update(invoice), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public InvoiceModel findById(@PathVariable Long id) {
-        return invoiceService.findById(id);
+    public ResponseEntity<InvoiceModel> findById(@PathVariable Long id) throws Exception {
+        return new ResponseEntity<>(invoiceService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/")
-    public List<InvoiceModel> findAll() {
-        return invoiceService.findAll();
+    public ResponseEntity<List<InvoiceModel>> findAll() {
+        return new ResponseEntity<>(invoiceService.findAll(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<InvoiceModel> delete(@PathVariable Long id) throws Exception {
         invoiceService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.piradrian.clientinvoice.service;
 
 import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.repository.InvoiceRepository;
+import com.piradrian.clientinvoice.validation.InvoiceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +12,23 @@ import java.util.List;
 public class InvoiceService {
 
     @Autowired
+    private InvoiceValidation invoiceValidation;
+
+    @Autowired
     private InvoiceRepository invoiceRepository;
 
-    public InvoiceModel create(InvoiceModel invoice) {
+    public InvoiceModel create(InvoiceModel invoice) throws Exception {
+        invoiceValidation.createValidation(invoice);
         return invoiceRepository.save(invoice);
     }
 
-    public InvoiceModel update(InvoiceModel invoice) {
+    public InvoiceModel update(InvoiceModel invoice) throws Exception {
+        invoiceValidation.updateValidation(invoice);
         return invoiceRepository.save(invoice);
     }
 
-    public InvoiceModel findById(Long id) {
+    public InvoiceModel findById(Long id) throws Exception {
+        invoiceValidation.findByIdValidation(id);
         return invoiceRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +36,8 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws Exception{
+        invoiceValidation.deleteValidation(id);
         invoiceRepository.deleteById(id);
     }
 }
