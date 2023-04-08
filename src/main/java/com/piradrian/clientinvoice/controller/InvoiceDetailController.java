@@ -14,7 +14,7 @@ public class InvoiceDetailController {
     @Autowired
     private InvoiceDetailService invoiceDetailService;
 
-    @PostMapping
+    @PostMapping("/")
     public InvoiceDetailModel create(@RequestBody InvoiceDetailModel invoiceDetail) throws Exception {
         return invoiceDetailService.create(invoiceDetail);
     }
