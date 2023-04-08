@@ -8,35 +8,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/invoice-details")
+@RequestMapping("/api/invoice-details")
 public class InvoiceDetailController {
 
     @Autowired
     private InvoiceDetailService invoiceDetailService;
 
     @PostMapping
-    public InvoiceDetailModel create(@RequestBody InvoiceDetailModel invoiceDetail) {
+    public InvoiceDetailModel create(@RequestBody InvoiceDetailModel invoiceDetail) throws Exception {
         return invoiceDetailService.create(invoiceDetail);
     }
 
-    @PutMapping("/{id}")
-    public InvoiceDetailModel update(@PathVariable Long id, @RequestBody InvoiceDetailModel invoiceDetail) {
-        invoiceDetail.setInvoice_detail_id(id);
+    @PutMapping("/")
+    public InvoiceDetailModel update(@RequestBody InvoiceDetailModel invoiceDetail) throws Exception {
         return invoiceDetailService.update(invoiceDetail);
     }
 
     @GetMapping("/{id}")
-    public InvoiceDetailModel findById(@PathVariable Long id) {
+    public InvoiceDetailModel findById(@PathVariable Long id) throws Exception {
         return invoiceDetailService.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<InvoiceDetailModel> findAll() {
         return invoiceDetailService.findAll();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) throws Exception {
         invoiceDetailService.delete(id);
     }
 }

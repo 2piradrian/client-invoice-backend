@@ -13,9 +13,6 @@ public class InvoiceValidation {
     public void createValidation(InvoiceModel invoice) throws Exception {
         hasInvalidValues(invoice);
 
-        if (invoice.getClientModel() == null) {
-            throw new Exception("El cliente es requerido.");
-        }
         if (invoice.getCreated_at() != null) {
             throw new Exception("La fecha de creación debe ser generada automáticamente.");
         }
@@ -47,7 +44,7 @@ public class InvoiceValidation {
 
     public static void hasInvalidValues (InvoiceModel invoice) throws Exception {
         if(invoice.getClientModel() == null){
-            throw new Exception("El cliente es obligatorio");
+            throw new Exception("El cliente es inválido");
         }
         if (invoice.getTotal() <= 0) {
             throw new Exception("El total es inválido.");

@@ -11,7 +11,7 @@ public class InvoiceDetailModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long invoice_detail_id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "invoice_id")
@@ -21,8 +21,9 @@ public class InvoiceDetailModel {
     @JoinColumn(name = "product_id")
     private ProductModel productModel;
 
+    private Double price; // Es una clase debido a que necesito que sea nulo al llegar.
+
     private int amount;
 
-    private double price;
 
 }
