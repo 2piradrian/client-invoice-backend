@@ -2,6 +2,7 @@ package com.piradrian.clientinvoice.service;
 
 import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.model.ProductModel;
+import com.piradrian.clientinvoice.repository.InvoiceDetailRepository;
 import com.piradrian.clientinvoice.repository.InvoiceRepository;
 import com.piradrian.clientinvoice.validation.InvoiceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class InvoiceService {
 
     public InvoiceModel create(InvoiceModel invoice) throws Exception {
         invoiceValidation.createValidation(invoice);
+
         return invoiceRepository.save(invoice);
     }
 

@@ -12,7 +12,6 @@ public class InvoiceValidation {
 
     public void createValidation(InvoiceModel invoice) throws Exception {
         hasInvalidValues(invoice);
-
         if (invoice.getCreated_at() != null) {
             throw new Exception("La fecha de creación debe ser generada automáticamente.");
         }

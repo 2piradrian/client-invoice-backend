@@ -3,6 +3,7 @@ package com.piradrian.clientinvoice.service;
 import com.piradrian.clientinvoice.model.InvoiceDetailModel;
 import com.piradrian.clientinvoice.repository.InvoiceDetailRepository;
 import com.piradrian.clientinvoice.validation.InvoiceDetailValidation;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class InvoiceDetailService {
         invoiceDetail.setPrice(invoiceDetail.getAmount() * invoiceDetail.getProductModel().getPrice()); // calculo del precio
         return invoiceDetailRepository.save(invoiceDetail);
     }
+   // sobrecargar la funcion
+   // public InvoiceDetailModel create(List<InvoiceDetailModel> invoiceDetail) throws Exception {
+        //return
+    // }
 
     public InvoiceDetailModel update(InvoiceDetailModel invoiceDetail) throws Exception {
         invoiceDetailValidation.updateValidation(invoiceDetail);
