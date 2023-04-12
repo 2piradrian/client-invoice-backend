@@ -34,8 +34,4 @@ public class InvoiceDetailController {
         return invoiceDetailService.findAll();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) throws Exception {
-        invoiceDetailService.delete(id);
-    }
 }

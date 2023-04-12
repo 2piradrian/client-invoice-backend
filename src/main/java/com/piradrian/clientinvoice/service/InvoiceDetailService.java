@@ -24,10 +24,15 @@ public class InvoiceDetailService {
         invoiceDetail.setPrice(invoiceDetail.getAmount() * invoiceDetail.getProductModel().getPrice()); // calculo del precio
         return invoiceDetailRepository.save(invoiceDetail);
     }
-   // sobrecargar la funcion
-   // public InvoiceDetailModel create(List<InvoiceDetailModel> invoiceDetail) throws Exception {
-        //return
-    // }
+
+    public InvoiceDetailModel create(List<InvoiceDetailModel> invoiceDetailList) throws Exception {
+        for(InvoiceDetailModel invoiceDetail : invoiceDetailList) {
+            invoiceDetailValidation.createValidation(invoiceDetail);
+            invoiceDetail.setPrice(invoiceDetail.getAmount() * invoiceDetail.getProductModel().getPrice());
+            invoiceDetailRepository.save(invoiceDetail);
+        }
+        return null;
+    }
 
     public InvoiceDetailModel update(InvoiceDetailModel invoiceDetail) throws Exception {
         invoiceDetailValidation.updateValidation(invoiceDetail);
@@ -43,8 +48,4 @@ public class InvoiceDetailService {
         return invoiceDetailRepository.findAll();
     }
 
-    public void delete(Long id) throws Exception {
-        invoiceDetailValidation.deleteValidation(id);
-        invoiceDetailRepository.deleteById(id);
-    }
 }

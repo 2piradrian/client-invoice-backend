@@ -22,17 +22,6 @@ public class InvoiceService {
 
     public InvoiceModel create(InvoiceModel invoice) throws Exception {
         invoiceValidation.createValidation(invoice);
-
-        return invoiceRepository.save(invoice);
-    }
-
-    public InvoiceModel update(InvoiceModel invoice) throws Exception {
-        Optional<InvoiceModel> optionalInvoice = invoiceRepository.findById(invoice.getId());
-
-        invoiceValidation.updateValidation(invoice, optionalInvoice);
-
-        invoice.setCreated_at(optionalInvoice.get().getCreated_at());
-
         return invoiceRepository.save(invoice);
     }
 
@@ -43,10 +32,5 @@ public class InvoiceService {
 
     public List<InvoiceModel> findAll() {
         return invoiceRepository.findAll();
-    }
-
-    public void delete(Long id) throws Exception{
-        invoiceValidation.deleteValidation(id);
-        invoiceRepository.deleteById(id);
     }
 }
