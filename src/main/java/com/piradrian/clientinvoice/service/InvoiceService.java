@@ -25,6 +25,13 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
+    public void create(List<InvoiceModel> invoiceList) throws Exception {
+       for(InvoiceModel invoice : invoiceList) {
+           invoiceValidation.createValidation(invoice);
+           invoiceRepository.save(invoice);
+       }
+    }
+
     public InvoiceModel findById(Long id) throws Exception {
         invoiceValidation.findByIdValidation(id);
         return invoiceRepository.findById(id).orElse(null);

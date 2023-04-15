@@ -20,6 +20,10 @@ public class ProductController {
     public ResponseEntity<ProductModel> create(@RequestBody ProductModel product) throws Exception {
         return new ResponseEntity<>(productService.create(product), HttpStatus.CREATED);
     }
+    @PostMapping(path = "/list/")
+    public ResponseEntity<List<ProductModel>> create(@RequestBody List<ProductModel> productList) throws Exception {
+        return new ResponseEntity<>(productService.create(productList), HttpStatus.CREATED);
+    }
 
     @PutMapping("/")
     public ResponseEntity<ProductModel> update(@RequestBody ProductModel product) throws Exception {
