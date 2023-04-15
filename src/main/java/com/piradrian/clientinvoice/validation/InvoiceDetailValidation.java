@@ -2,12 +2,10 @@ package com.piradrian.clientinvoice.validation;
 
 import com.piradrian.clientinvoice.model.InvoiceDetailModel;
 import com.piradrian.clientinvoice.repository.InvoiceDetailRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Slf4j
 @Component
 public class InvoiceDetailValidation {
     private final InvoiceDetailRepository invoiceDetailRepository;
@@ -40,12 +38,6 @@ public class InvoiceDetailValidation {
         }
     }
 
-    public void deleteValidation(Long id) throws Exception {
-        if(id <= 0){
-            throw new Exception("El id no es válido");
-        }
-    }
-
     public static void hasInvalidValues (InvoiceDetailModel invoiceDetail) throws Exception {
 
         if (invoiceDetail.getAmount() <= 0) {
@@ -60,9 +52,6 @@ public class InvoiceDetailValidation {
         if (invoiceDetail.getInvoiceModel() == null){
             throw new Exception("La factura es inválida.");
         }
-
-        // Verificar que el producto exista en la bbdd
-        // Verificar que el cliente exista en la bbdd
 
     }
 
