@@ -22,15 +22,13 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public ProductModel create(ProductModel product) throws Exception {
-        productValidation.createValidation(product);
-        return productRepository.save(product);
+        return createProducts(product);
     }
 
     public List<ProductModel> create(List<ProductModel> productList) throws Exception {
         List<ProductModel> addedProducts = new ArrayList<>();
         for(ProductModel product : productList) {
-            productValidation.createValidation(product);
-            addedProducts.add(productRepository.save(product));
+            addedProducts.add(createProducts(product));
         }
         return addedProducts;
     }
@@ -52,5 +50,10 @@ public class ProductService {
     public void delete(Long id) throws Exception {
         productValidation.deleteValidation(id);
         productRepository.deleteById(id);
+    }
+
+    private ProductModel createProducts(ProductModel product) throws Exception {
+        productValidation.createValidation(product);
+        return productRepository.save(product);
     }
 }

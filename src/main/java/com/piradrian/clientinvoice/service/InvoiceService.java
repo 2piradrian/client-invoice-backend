@@ -4,7 +4,6 @@ import com.piradrian.clientinvoice.model.ClientModel;
 import com.piradrian.clientinvoice.model.InvoiceDetailModel;
 import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.model.ProductModel;
-import com.piradrian.clientinvoice.repository.InvoiceDetailRepository;
 import com.piradrian.clientinvoice.repository.InvoiceRepository;
 import com.piradrian.clientinvoice.repository.ProductRepository;
 import com.piradrian.clientinvoice.validation.InvoiceValidation;
