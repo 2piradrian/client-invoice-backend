@@ -2,11 +2,9 @@ package com.piradrian.clientinvoice.validation;
 
 import com.piradrian.clientinvoice.model.ProductModel;
 import com.piradrian.clientinvoice.repository.ProductRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-@Slf4j
 @Component
 public class ProductValidation {
     private final ProductRepository productRepository;
