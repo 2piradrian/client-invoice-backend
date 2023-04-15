@@ -21,7 +21,7 @@ public class InvoiceDetailModel {
     @JoinColumn(name = "product_id")
     private ProductModel productModel;
 
-    private Double price; // Es una clase debido a que necesito que sea nulo al llegar.
+    private Double price;
 
     private int amount;
 

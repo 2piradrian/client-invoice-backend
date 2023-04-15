@@ -2,12 +2,10 @@ package com.piradrian.clientinvoice.validation;
 
 import com.piradrian.clientinvoice.model.ClientModel;
 import com.piradrian.clientinvoice.repository.ClientRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Slf4j
 @Component
 public class ClientValidation {
 
@@ -22,17 +20,13 @@ public class ClientValidation {
     }
 
     public void updateValidation(ClientModel client) throws Exception {
-        Optional<ClientModel> optionalClient = clientRepository.findById(client.getId());
-
         hasInvalidValues(client);
 
-        if (client.getId() <= 0){
-            throw new Exception("El id no es válido");
-        }
+        Optional<ClientModel> optionalClient = clientRepository.findById(client.getId());
+
         if(optionalClient.isEmpty()){
             throw new Exception("El cliente que intenta modificar no existe");
         }
-
     }
 
     public void findByIdValidation(Long id) throws Exception {

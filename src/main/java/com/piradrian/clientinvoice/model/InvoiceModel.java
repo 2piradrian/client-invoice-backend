@@ -19,7 +19,7 @@ public class InvoiceModel {
 
     private LocalDateTime created_at;
 
-    private double total;
+    private Double total;
 
     @PrePersist
     private void prePersist() {

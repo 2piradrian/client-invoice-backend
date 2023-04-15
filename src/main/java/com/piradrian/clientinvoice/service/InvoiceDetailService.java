@@ -1,6 +1,7 @@
 package com.piradrian.clientinvoice.service;
 
 import com.piradrian.clientinvoice.model.InvoiceDetailModel;
+import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.repository.InvoiceDetailRepository;
 import com.piradrian.clientinvoice.validation.InvoiceDetailValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,11 @@ public class InvoiceDetailService {
     @Autowired
     private InvoiceDetailRepository invoiceDetailRepository;
 
-    public InvoiceDetailModel create(InvoiceDetailModel invoiceDetail) throws Exception {
+    public void create(InvoiceDetailModel invoiceDetail, InvoiceModel invoiceCreated) throws Exception {
+        invoiceDetail.setInvoiceModel(invoiceCreated);
         invoiceDetailValidation.createValidation(invoiceDetail);
         invoiceDetail.setPrice(invoiceDetail.getAmount() * invoiceDetail.getProductModel().getPrice());
-        return invoiceDetailRepository.save(invoiceDetail);
-    }
-
-    public InvoiceDetailModel create(List<InvoiceDetailModel> invoiceDetailList) throws Exception {
-        for(InvoiceDetailModel invoiceDetail : invoiceDetailList) {
-            invoiceDetailValidation.createValidation(invoiceDetail);
-            invoiceDetail.setPrice(invoiceDetail.getAmount() * invoiceDetail.getProductModel().getPrice());
-            invoiceDetailRepository.save(invoiceDetail);
-        }
-        return null;
+        invoiceDetailRepository.save(invoiceDetail);
     }
 
     public InvoiceDetailModel update(InvoiceDetailModel invoiceDetail) throws Exception {
