@@ -4,6 +4,7 @@ import com.piradrian.clientinvoice.model.ClientModel;
 import com.piradrian.clientinvoice.model.InvoiceDetailModel;
 import com.piradrian.clientinvoice.model.InvoiceModel;
 import com.piradrian.clientinvoice.model.ProductModel;
+import com.piradrian.clientinvoice.repository.ClientRepository;
 import com.piradrian.clientinvoice.repository.InvoiceRepository;
 import com.piradrian.clientinvoice.repository.ProductRepository;
 import com.piradrian.clientinvoice.validation.InvoiceValidation;
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class InvoiceService {
 
     @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
     private ProductRepository productRepository;
     @Autowired
     private InvoiceRepository invoiceRepository;
@@ -26,9 +29,11 @@ public class InvoiceService {
     private InvoiceDetailService invoiceDetailService;
 
     public List<InvoiceModel> create(List<InvoiceDetailModel> invoiceDetailList, ClientModel client) throws Exception {
-        // lista para dar feedback al frontend
+       // valida el cliente
+        invoiceValidation.existsByIdValidation(clientRepository.findById(client.getId()));
+       // lista para dar feedback al frontend
        List<InvoiceModel> addedInvoices = new ArrayList<>();
-        // contador de precio
+       // contador de precio
        double total = 0;
        // recorre la lista de detalles de factura para validar
        for(InvoiceDetailModel invoiceDetail : invoiceDetailList) {
@@ -50,7 +55,6 @@ public class InvoiceService {
            invoiceDetailService.create(invoiceDetail, invoiceCreated);
            addedInvoices.add(invoiceCreated);
        }
-
        return addedInvoices;
     }
 
