@@ -19,12 +19,7 @@ public class InvoiceController {
     private InvoiceService invoiceService;
 
     @PostMapping("/")
-    public ResponseEntity<InvoiceModel> create(@RequestBody SingleProduct request) throws Exception {
-        return new ResponseEntity<>(invoiceService.create(request.invoiceDetail, request.client), HttpStatus.OK);
-    }
-
-    @PostMapping("/list/")
-    public ResponseEntity<List<InvoiceModel>> create(@RequestBody MultiProduct request) throws Exception {
+    public ResponseEntity<List<InvoiceModel>> create(@RequestBody InvoiceDetailRequest request) throws Exception {
         return new ResponseEntity<>(invoiceService.create(request.invoiceDetailList, request.client), HttpStatus.OK);
     }
 
@@ -38,21 +33,11 @@ public class InvoiceController {
         return new ResponseEntity<>(invoiceService.findAll(), HttpStatus.OK);
     }
 
-    private static class SingleProduct {
-        public InvoiceDetailModel invoiceDetail;
-        public ClientModel client;
-
-        public SingleProduct(InvoiceDetailModel invoiceDetail, ClientModel client) {
-            this.invoiceDetail = invoiceDetail;
-            this.client = client;
-        }
-    }
-
-    private static class MultiProduct {
+    private static class InvoiceDetailRequest {
         public List<InvoiceDetailModel> invoiceDetailList;
         public ClientModel client;
 
-        public MultiProduct(List<InvoiceDetailModel> invoiceDetail, ClientModel client) {
+        public InvoiceDetailRequest(List<InvoiceDetailModel> invoiceDetail, ClientModel client) {
             this.invoiceDetailList = invoiceDetail;
             this.client = client;
         }
