@@ -19,10 +19,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductModel create(ProductModel product) throws Exception {
-        return createProducts(product);
-    }
-
     public List<ProductModel> create(List<ProductModel> productList) throws Exception {
         List<ProductModel> addedProducts = new ArrayList<>();
         for(ProductModel product : productList) {
