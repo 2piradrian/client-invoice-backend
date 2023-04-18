@@ -3,19 +3,6 @@ client and invoices backend with java sprring boot using sql
 
 ## Test Invoice
 
-### Individual
-{
-  "invoiceDetail": {
-      "productModel": {
-          "id": 1
-      },
-    "amount": 2
-  },
-  "client": {
-    "id": 1
-  }
-}
-
 ### Lista
 {
   "invoiceDetail": [
